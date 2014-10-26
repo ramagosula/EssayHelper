@@ -40,7 +40,7 @@ public class WordFrequency2 {
             {
 
                 if(!isNumeric(word) && word.trim().length() > 0){
-                word = word.toLowerCase();//Remember, lowercase word here is a String!
+//                word = word.toLowerCase();//Remember, lowercase word here is a String!
                 if(wordList.isEmpty()){
                     wordList.add(new Word(word));
                 }else{
