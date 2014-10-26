@@ -1,11 +1,10 @@
-import org.apache.poi.hwpf.Word2Forrest;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 /*
  * Make sure to add the jar files to the classPath!!
- * 
+ *
  * C:\Users\ramag_000\Downloads\poi-bin-3.10.1-20140818\poi-3.10.1\poi-3.10.1-20140818.jar
 C:\Users\ramag_000\Downloads\poi-bin-3.10.1-20140818\poi-3.10.1\poi-examples-3.10.1-20140818.jar
 C:\Users\ramag_000\Downloads\poi-bin-3.10.1-20140818\poi-3.10.1\poi-excelant-3.10.1-20140818.jar
@@ -21,16 +20,19 @@ C:\Users\ramag_000\Downloads\poi-bin-3.10.1-20140818\poi-3.10.1\ooxml-lib\xmlbea
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
+
 
 public class Document
 {
     private String fileText = "";
+    private String filePath = "";
+    File file;
 
     //document takes filepath, alternative could be a File
-    public Document(String filePath) throws FileNotFoundException
+    public Document(File file) throws FileNotFoundException
     {// throws on Constructor should be fixed. Kludge
-        File file = new File(filePath);
+        this.file = file;
+        this.filePath =file.getPath();
         FileInputStream fis = new FileInputStream(file);
 
         if (filePath.substring(filePath.length() - 3).equals("txt"))
@@ -67,7 +69,7 @@ public class Document
                 wordExtractor.close();
             } catch (IOException e)
             {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             }
         }
@@ -77,6 +79,10 @@ public class Document
     {
         return fileText;
     }
+    public File getFile(){
+    	return this.file;
+    }
+    public String getPath(){
+    	return this.filePath;
+    }
 }
-
-
