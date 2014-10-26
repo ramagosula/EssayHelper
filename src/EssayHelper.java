@@ -1,6 +1,8 @@
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.event.*;
 import java.util.*;
 import java.io.File;
@@ -71,7 +73,7 @@ public class EssayHelper extends JApplet
         // make a panel for the buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(52, 129, 180));
-
+        
         // add the buttons to the button panel
         JButton run = new JButton(RUN);
         run.addActionListener(this);
@@ -106,14 +108,8 @@ public class EssayHelper extends JApplet
 
         }  else if (RUN.equals(command))
         {
-        	try
-            {
-                checkBadPhrases();
-            } catch (FileNotFoundException e)
-            {
-                e.printStackTrace();
-            }
            checkRepetitiveness();
+           checkBadPhrases();       
         }
         else if (FILE.equals(command))
         {
@@ -162,7 +158,7 @@ public class EssayHelper extends JApplet
         return filePath;
     }
 
-    public void checkBadPhrases() throws FileNotFoundException
+    public void checkBadPhrases() 
     {
         //initialize
         
@@ -173,8 +169,8 @@ public class EssayHelper extends JApplet
         {
             for (int j = 0; j < words.length; j++)
             {
-                String lower = words[j].toLowerCase();
-                if (lower.equals(badWord))
+//                String lower = words[j].toLowerCase();
+                if (words[j].equalsIgnoreCase(badWord))
                 {
                     //matches[j] = words[j];                        [Unused code removed temporarily]
                     words[j] = "*" + words[j].toUpperCase() + "*";
@@ -184,10 +180,17 @@ public class EssayHelper extends JApplet
         }
         //JOptionPane.showMessageDialog(null,matches);
         String paragraph = "";
-
+        int i = 0;
         for (String word : words)
         {
-            paragraph = paragraph + " " + word;
+
+            paragraph += word;
+            if(i%2 == 0){
+            	paragraph += "\t\t";
+            }else{
+            	paragraph += "\n";
+            }
+            i++;
         }
 
         inputField.setText(paragraph);
